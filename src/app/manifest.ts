@@ -1,4 +1,6 @@
 import { MetadataRoute } from 'next';
+import android192 from './android-chrome-192x192.png';
+import android512 from './android-chrome-512x512.png';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -6,12 +8,12 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: 'PTools',
     icons: [
       {
-        src: '/android-chrome-192x192.png',
+        src: android192.src,
         sizes: '192x192',
         type: 'image/png',
       },
       {
-        src: '/android-chrome-512x512.png',
+        src: android512.src,
         sizes: '512x512',
         type: 'image/png',
       },
@@ -19,6 +21,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#ffffff',
     background_color: '#ffffff',
     display: 'standalone',
+    id: '/',
     start_url: '/',
   };
   //   return {
