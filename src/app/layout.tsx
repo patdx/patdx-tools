@@ -45,15 +45,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(inter.className, 'flex flex-col')}>
-        <div className="sticky left-0 right-0 top-0 z-10 flex flex-none justify-center border-b border-eggplant bg-eggplant-900 text-eggplant shadow-md pt-safe pr-safe pl-safe landscape:hidden">
+        <div className="sticky left-0 right-0 top-0 z-10 flex flex-none justify-center border-b border-eggplant bg-eggplant-900 text-eggplant shadow-md pt-safe pr-safe pl-safe dark:bg-eggplant-100 landscape:hidden">
           <div className="p-2">
             <Image src={logo} alt="Logo" className="h-6 w-6" />
           </div>
         </div>
-        <div className="flex flex-1 flex-col">{children}</div>
-        {/* <div className="h-8 absolute bottom-safe left-[50vw] right-0 bg-azure-200"></div>
-        <div className="h-8 absolute bottom-0 left-0 right-[50vw] bg-azure"></div> */}
-        <div className="sticky bottom-0 left-0 right-0 flex-none border-t border-eggplant bg-eggplant-900 pb-safe">
+        <div className="relative flex flex-1 flex-col text-eggplant dark:bg-black dark:text-eggplant-700">
+          {children}
+        </div>
+        <div className="sticky bottom-0 left-0 right-0 flex-none border-t border-eggplant bg-eggplant-900 pb-safe dark:bg-eggplant-100">
           <div className="flex h-8 items-stretch justify-center">
             <MyLink href={'/'}>Home</MyLink>
             <MyLink href={'/clock'}>Clock</MyLink>
@@ -69,7 +69,7 @@ function MyLink(props: { href: string; children?: any }) {
   return (
     <Link
       href={props.href}
-      className="flex items-center px-2 hover:bg-eggplant-800 active:bg-eggplant-800"
+      className="flex items-center px-2 hover:bg-eggplant-800 active:bg-eggplant-800 dark:text-eggplant-600"
     >
       <div>{props.children}</div>
     </Link>
