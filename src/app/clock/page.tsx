@@ -6,9 +6,5 @@ import { Clock } from './clock';
 // });
 
 export default function ClockPage() {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center">
-      <Clock />
-    </div>
-  );
+  return <Clock />;
 }
