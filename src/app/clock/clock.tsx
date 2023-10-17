@@ -17,7 +17,7 @@ const timeInSeconds = computed(() => {
 export const Clock = observer(function Clock() {
   const isSSR = useIsSSR();
   return (
-    <div className="tabular-nums text-[20vw]">
+    <div className="text-[20vw] tabular-nums">
       {isSSR ? '00:00:00' : timeInSeconds.get()}
     </div>
   );
