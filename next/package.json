@@ -1,0 +1,41 @@
+{
+  "name": "patdx-tools",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@react-aria/ssr": "^3.8.0",
+    "clsx": "^2.0.0",
+    "flowbite": "^1.8.1",
+    "flowbite-react": "^0.6.4",
+    "luxon": "^3.4.3",
+    "mobx": "^6.10.2",
+    "mobx-react-lite": "^4.0.5",
+    "mobx-utils": "^6.0.8",
+    "next": "13.5.5",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.3.2",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.5",
+    "postcss": "^8",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.6",
+    "pwa-asset-generator": "^6.3.1",
+    "tailwindcss": "^3",
+    "tailwindcss-safe-area": "^0.4.1",
+    "typescript": "^5",
+    "zx": "^7.2.3"
+  }
+}

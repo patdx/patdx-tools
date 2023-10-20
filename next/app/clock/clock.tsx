@@ -2,18 +2,16 @@
 
 import { useIsSSR } from '@react-aria/ssr';
 import clsx from 'clsx';
+import { Checkbox, Label } from 'flowbite-react';
 import { DateTime } from 'luxon';
 import {
-  action,
-  computed,
   makeAutoObservable,
   reaction,
-  runInAction,
+  runInAction
 } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { now } from 'mobx-utils';
 import { useEffect } from 'react';
-import { Checkbox, Label } from 'flowbite-react';
 
 const state = makeAutoObservable(
   {
@@ -142,61 +140,3 @@ const wakeLockTracker = makeAutoObservable({
     this.targetStatus = 'released';
   },
 });
-
-reaction(
-  () =>
-    wakeLockTracker.targetStatus === 'locked' &&
-    wakeLockTracker.status === 'released',
-  async (ready) => {
-    if (!ready) return;
-
-    try {
-      const promise = navigator.wakeLock.request('screen');
-      runInAction(() => {
-        wakeLockTracker.wakeLockPromise = promise;
-        wakeLockTracker.status = 'locking';
-      });
-
-      const wakeLock = await promise;
-      runInAction(() => {
-        wakeLockTracker.wakeLockPromise = null;
-        wakeLockTracker.wakeLock = wakeLock;
-        wakeLockTracker.status = 'locked';
-      });
-
-      // listen for our release event
-      wakeLock.addEventListener('release', () => {
-        console.log('Wake lock released');
-        runInAction(() => {
-          wakeLockTracker.wakeLock = null;
-          wakeLockTracker.status = 'released';
-        });
-        // if wake lock is released alter the UI accordingly
-      });
-    } catch (err) {
-      // if wake lock request fails - usually system related, such as battery
-    }
-  },
-);
-
-reaction(
-  () =>
-    wakeLockTracker.targetStatus === 'released' &&
-    wakeLockTracker.status === 'locked',
-  async (ready) => {
-    if (!ready) return;
-
-    console.log('Releasing');
-    runInAction(() => {
-      wakeLockTracker.status = 'releasing';
-    });
-
-    await wakeLockTracker.wakeLock?.release();
-
-    console.log('Released');
-    runInAction(() => {
-      wakeLockTracker.wakeLock = null;
-      wakeLockTracker.status = 'released';
-    });
-  },
-);
