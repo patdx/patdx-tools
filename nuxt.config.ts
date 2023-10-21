@@ -2,6 +2,28 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: 'src/',
-  modules: ['@nuxtjs/tailwindcss'],
   css: ['~/assets/css/main.css'],
+  modules: ['@vueuse/nuxt', '@pinia/nuxt'],
+  pinia: {
+    storesDirs: ['./src/stores/**'],
+  },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+  nitro: {
+    prerender: {
+      routes: ['/manifest.json'],
+    },
+  },
+  experimental: {
+    // inlineSSRStyles: false,
+  },
+  vue: {
+    compilerOptions: {
+      whitespace: 'condense',
+    },
+  },
 });

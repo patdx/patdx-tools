@@ -1,6 +1,6 @@
-import { makeAutoObservable, reaction, runInAction } from 'mobx';
+import { runInAction } from 'mobx';
 
-const wakeLockTracker = makeAutoObservable({
+const wakeLockTracker = shallowReactive({
   targetStatus: 'released' as 'released' | 'locked',
   status: 'released' as 'released' | 'locking' | 'locked' | 'releasing',
   wakeLockPromise: null as Promise<WakeLockSentinel> | null,
@@ -17,7 +17,7 @@ const wakeLockTracker = makeAutoObservable({
   },
 });
 
-reaction(
+watch(
   () =>
     wakeLockTracker.targetStatus === 'locked' &&
     wakeLockTracker.status === 'released',
@@ -26,17 +26,19 @@ reaction(
 
     try {
       const promise = navigator.wakeLock.request('screen');
-      runInAction(() => {
-        wakeLockTracker.wakeLockPromise = promise;
-        wakeLockTracker.status = 'locking';
-      });
+
+      // runInAction(() => {
+      wakeLockTracker.wakeLockPromise = promise;
+      wakeLockTracker.status = 'locking';
+      // });
 
       const wakeLock = await promise;
-      runInAction(() => {
-        wakeLockTracker.wakeLockPromise = null;
-        wakeLockTracker.wakeLock = wakeLock;
-        wakeLockTracker.status = 'locked';
-      });
+
+      // runInAction(() => {
+      wakeLockTracker.wakeLockPromise = null;
+      wakeLockTracker.wakeLock = wakeLock;
+      wakeLockTracker.status = 'locked';
+      // });
 
       // listen for our release event
       wakeLock.addEventListener('release', () => {
@@ -50,10 +52,10 @@ reaction(
     } catch (err) {
       // if wake lock request fails - usually system related, such as battery
     }
-  }
+  },
 );
 
-reaction(
+watch(
   () =>
     wakeLockTracker.targetStatus === 'released' &&
     wakeLockTracker.status === 'locked',
@@ -72,7 +74,7 @@ reaction(
       wakeLockTracker.wakeLock = null;
       wakeLockTracker.status = 'released';
     });
-  }
+  },
 );
 
 export const useWakeLock = () => {
