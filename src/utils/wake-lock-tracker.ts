@@ -1,5 +1,3 @@
-import { runInAction } from 'mobx';
-
 const wakeLockTracker = shallowReactive({
   targetStatus: 'released' as 'released' | 'locked',
   status: 'released' as 'released' | 'locking' | 'locked' | 'releasing',
@@ -43,10 +41,10 @@ watch(
       // listen for our release event
       wakeLock.addEventListener('release', () => {
         console.log('Wake lock released');
-        runInAction(() => {
-          wakeLockTracker.wakeLock = null;
-          wakeLockTracker.status = 'released';
-        });
+        // runInAction(() => {
+        wakeLockTracker.wakeLock = null;
+        wakeLockTracker.status = 'released';
+        // });
         // if wake lock is released alter the UI accordingly
       });
     } catch (err) {
@@ -63,17 +61,17 @@ watch(
     if (!ready) return;
 
     console.log('Releasing');
-    runInAction(() => {
-      wakeLockTracker.status = 'releasing';
-    });
+    // runInAction(() => {
+    wakeLockTracker.status = 'releasing';
+    // });
 
     await wakeLockTracker.wakeLock?.release();
 
     console.log('Released');
-    runInAction(() => {
-      wakeLockTracker.wakeLock = null;
-      wakeLockTracker.status = 'released';
-    });
+    // runInAction(() => {
+    wakeLockTracker.wakeLock = null;
+    wakeLockTracker.status = 'released';
+    // });
   },
 );
 

@@ -31,9 +31,6 @@
     "clsx": "^2.0.0",
     "flowbite": "^1.8.1",
     "flowbite-vue": "^0.0.17",
-    "luxon": "^3.4.3",
-    "mobx": "^6.10.2",
-    "mobx-utils": "^6.0.8",
-    "mobx-vue-lite": "^0.4.0"
+    "luxon": "^3.4.3"
   }
 }
