@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import clsx from 'clsx';
-import { useWakeLock } from '../utils/wake-lock-tracker';
+import { useActor } from '@xstate/vue';
+
+const { state, send } = useActor(wakeLockService);
+onMounted(() => {
+  send({ type: 'LOCK' });
+});
+onUnmounted(() => {
+  send({ type: 'UNLOCK' });
+});
 
 const clockState = useClockStore();
-
-useWakeLock();
 </script>
 
 <template>

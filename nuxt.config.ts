@@ -3,7 +3,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: 'src/',
   css: ['~/assets/css/main.css'],
-  modules: ['@vueuse/nuxt', '@pinia/nuxt'],
+  modules: [
+    '@vueuse/nuxt',
+    '@pinia/nuxt',
+    [
+      'unplugin-icons/nuxt',
+      {
+        /* options */
+      },
+    ],
+  ],
   pinia: {
     storesDirs: ['./src/stores/**'],
   },

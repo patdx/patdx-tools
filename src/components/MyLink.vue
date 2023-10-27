@@ -4,7 +4,8 @@ const props = defineProps(['href']);
 <template>
   <NuxtLink
     :to="props.href"
-    class="flex items-center px-2 hover:bg-eggplant-800 active:bg-eggplant-800 dark:text-eggplant-600"
-    ><slot
-  /></NuxtLink>
+    class="flex flex-col items-center justify-center px-2 text-sm hover:bg-eggplant-800 active:bg-eggplant-800 dark:text-eggplant-600"
+  >
+    <slot />
+  </NuxtLink>
 </template>
