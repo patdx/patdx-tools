@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@iconify-json/ri": "^1.1.12",
     "@nuxt/devtools": "latest",
     "@pinia/nuxt": "^0.5.1",
     "@types/luxon": "^3.3.3",
@@ -21,16 +22,19 @@
     "postcss": "^8.4.31",
     "prettier-plugin-tailwindcss": "^0.5.6",
     "pwa-asset-generator": "^6.3.1",
-    "tailwindcss": "^3.3.3",
+    "tailwindcss": "^3.3.5",
     "tailwindcss-safe-area": "^0.4.1",
-    "vue": "^3.3.4",
+    "unplugin-icons": "^0.17.1",
+    "vue": "^3.3.7",
     "vue-router": "^4.2.5",
     "zx": "^7.2.3"
   },
   "dependencies": {
+    "@xstate/vue": "^2.0.0",
     "clsx": "^2.0.0",
-    "flowbite": "^1.8.1",
-    "flowbite-vue": "^0.0.17",
-    "luxon": "^3.4.3"
+    "flowbite": "^2.0.0",
+    "flowbite-vue": "^0.1.0",
+    "luxon": "^3.4.3",
+    "xstate": "^4.38.3"
   }
 }
