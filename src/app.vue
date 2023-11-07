@@ -2,6 +2,7 @@
 import RiHome2Line from '~icons/ri/home-2-line';
 import RiTimeLine from '~icons/ri/time-line';
 import RiInformationLine from '~icons/ri/information-line';
+import RiMagicLine from '~icons/ri/magic-line';
 
 useHead({
   title: 'PTools',
@@ -48,6 +49,10 @@ useHead({
         <MyLink href="/clock">
           <RiTimeLine />
           Clock
+        </MyLink>
+        <MyLink href="/random">
+          <RiMagicLine />
+          Random
         </MyLink>
         <MyLink href="/about">
           <RiInformationLine />
