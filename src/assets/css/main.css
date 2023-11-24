@@ -36,3 +36,7 @@ body {
   /* color: red; */
   /* background-color: lyhujhu */
 }
+
+#__nuxt {
+  @apply flex min-h-screen flex-col;
+}

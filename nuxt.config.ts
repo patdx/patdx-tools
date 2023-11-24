@@ -1,3 +1,5 @@
+import wasm from 'vite-plugin-wasm';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -34,5 +36,13 @@ export default defineNuxtConfig({
     compilerOptions: {
       whitespace: 'condense',
     },
+  },
+  vite: {
+    // plugins: [wasm()],
+  },
+  routeRules: {
+    // dates use sqlite locally
+    // so do not support server side rendering
+    '/dates/**/*': { ssr: false },
   },
 });
