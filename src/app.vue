@@ -3,6 +3,7 @@ import RiHome2Line from '~icons/ri/home-2-line';
 import RiTimeLine from '~icons/ri/time-line';
 import RiInformationLine from '~icons/ri/information-line';
 import RiMagicLine from '~icons/ri/magic-line';
+import RiCalendar2Fill from '~icons/ri/calendar-2-fill';
 
 useHead({
   title: 'PTools',
@@ -32,7 +33,8 @@ useHead({
 </script>
 
 <template>
-  <div class="flex h-screen flex-col">
+  <div class="contents">
+    <!-- add extra wrapper element to fix hydration error (hydration of routes does not support fragment) -->
     <div
       class="relative flex flex-1 flex-col text-eggplant dark:bg-black dark:text-eggplant-700"
     >
@@ -49,6 +51,10 @@ useHead({
         <MyLink href="/clock">
           <RiTimeLine />
           Clock
+        </MyLink>
+        <MyLink href="/dates">
+          <RiCalendar2Fill />
+          Dates
         </MyLink>
         <MyLink href="/random">
           <RiMagicLine />
