@@ -3,6 +3,7 @@ import wasm from 'vite-plugin-wasm';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  ssr: false,
   srcDir: 'src/',
   css: ['~/assets/css/main.css'],
   modules: [
@@ -25,6 +26,7 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
+    preset: 'static',
     prerender: {
       routes: ['/manifest.json'],
     },
