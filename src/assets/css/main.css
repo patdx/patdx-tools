@@ -9,6 +9,7 @@ body {
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
 
   /* 
   with viewport=cover and status-bar=black-translucent,
@@ -20,8 +21,12 @@ body {
   /* position: relative; */
 
   overscroll-behavior-y: contain;
-  /* disable body scrolling on iPhone */
-  touch-action: none;
+  /*
+    `manipulation` kills double-tap zoom and its 350ms click delay while keeping
+    pinch zoom. It must not be `none`: that disables scrolling everywhere the
+    body scrolls, which broke the dates list.
+  */
+  touch-action: manipulation;
 
   user-select: none;
   /* height: 100vh; */
@@ -39,4 +44,59 @@ body {
 
 #__nuxt {
   @apply flex min-h-screen flex-col;
+  min-height: 100dvh;
+}
+
+/*
+  `tailwindcss-safe-area` emits a bare `env()` with no fallback, and an `env()`
+  the browser does not know makes the whole declaration invalid — so `pb-safe`
+  silently did nothing instead of resolving to 0. Override it with the fallback.
+*/
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/*
+  iOS 26/27 status strip.
+
+  WebKit decides the status-bar colour and whether to draw the top blur with one
+  predicate: `_shouldHideTopScrollPocket == _hasVisibleColorExtensionView(
+  BoxSide::Top)`. It hit-tests a single point at the top edge and takes the first
+  fixed or sticky ancestor, which must be opaque and more than 10px tall. Nothing
+  in this layout sits at the top edge — the tab bar is sticky at the bottom — so
+  the strip is the only candidate.
+
+  `background-clip: text` on an empty element keeps the colour in the computed
+  style while painting no pixels, so the strip supplies the colour without
+  drawing a bar over the page. 11px clears WebKit's 10px `thinBorderWidth`; it is
+  not a design value.
+*/
+.ios-status-strip {
+  display: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+  :root[data-standalone] .ios-status-strip {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 11px;
+    z-index: 2147483647;
+    pointer-events: none;
+    /* Matches `theme-color`, so the iOS strip and Android's status bar agree. */
+    background-color: #dfd9df;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  /* The app is `darkMode: 'media'` and its shell goes black in dark mode. */
+  @media (prefers-color-scheme: dark) {
+    :root[data-standalone] .ios-status-strip {
+      background-color: #000;
+    }
+  }
 }
